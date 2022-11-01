@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "coveralls.net": {
+      "version": "3.0.0",
+      "commands": [
+        "csmacnz.Coveralls"
+      ]
+    },
+    "versionize": {
+      "version": "1.15.0",
+      "commands": [
+        "versionize"
+      ]
+    }
+  }
+}

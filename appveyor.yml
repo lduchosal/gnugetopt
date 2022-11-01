@@ -1,0 +1,59 @@
+version: '0.9.2.{build}'
+image: Visual Studio 2022
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
+build:
+  project: src/
+
+branches:
+  only:
+  - master
+
+init:
+  - cmd: git config --global core.autocrlf true
+
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet tool install --global coveralls.net
+  - cmd: dotnet clean ./src
+  - cmd: dotnet restore ./src --verbosity m
+  - cmd: nuget restore ./src
+
+build_script:
+  - cmd: dotnet pack -c release ./src/Gnu.Getopt
+  
+test_script:
+  - cmd: dotnet test ./src/TestProject/TestProject.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  - vstest.console /logger:Appveyor c:\Projects\gnugetopt\src\TestProject\bin\Debug\net5.0\TestProject.dll
+  - csmacnz.Coveralls.exe --opencover -i C:\projects\gnugetopt\src\TestProject\coverage.net5.0.opencover.xml --useRelativePaths
+
+# 1. Regenerate AppVeyor Api Key
+# https://www.nuget.org/account/apikeys
+# 2. Encrypt configuration data
+# https://ci.appveyor.com/tools/encrypt
+# 3. Paste below
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: xxx
+  skip_symbols: false
+
+artifacts:
+  - path: '**\gnugetopt*.nupkg'
+    name: nuget
