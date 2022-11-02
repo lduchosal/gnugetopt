@@ -2,6 +2,29 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    	  <PackageId>GnuGetOpt</PackageId>
+    <PackageVersion>0.9.2</PackageVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageLicenseUrl>https://github.com/lduchosal/gnugetopt/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/lduchosal/gnugetopt</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>getopt gnu console arg parse</PackageTags>
+
+    <Title>GnuGetOpt .NET</Title>
+    <Description>C#.NET port of Java port of GNU getopt from glibc 2.0.6</Description>
+    <PackageSummary>C#.NET port of Java port of GNU</PackageSummary>
+
+    <authors>Luc Dvchosal</authors>
+    <owners>Luc Dvchosal</owners>
+    <copyright>Copyright 2021</copyright>
+    <SignAssembly>True</SignAssembly>
+    <SignAssembly Condition=" '$(OS)' != 'Windows_NT' ">false</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gnu.Getopt.snk</AssemblyOriginatorKeyFile>
+    <RepositoryUrl>https://github.com/lduchosal/gnugetopt.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+
   </PropertyGroup>
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
