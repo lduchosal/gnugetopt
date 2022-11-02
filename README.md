@@ -1,7 +1,6 @@
 # gnugetopt
 C#.NET port of Java port of GNU getopt from glibc 2.0.6
 
-[![Travis-CI Build Status](https://travis-ci.org/lduchosal/gnugetopt.svg?branch=main)](https://travis-ci.org/lduchosal/gnugetopt)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lduchosal/gnugetopt?branch=main&svg=true)](https://ci.appveyor.com/project/lduchosal/gnugetopt/branch/main)
 [![Nuget](https://img.shields.io/badge/nuget-gnugetopt2-blue.svg)](https://www.nuget.org/packages/gnugetopt)
 [![Nuget](https://img.shields.io/nuget/dt/GnuGetOpt)](https://www.nuget.org/packages/gnugetopt)
