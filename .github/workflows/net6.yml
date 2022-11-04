@@ -1,0 +1,31 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Install dependencies
+      run: dotnet tool install --global coveralls.net
+    - name: Restore dependencies
+      run: dotnet restore ./src --verbosity m
+    - name: Restore nugets
+      run: nuget restore ./src
+    - name: Build
+      run: dotnet build src
+    - name: Test
+      run: dotnet test src/TestProject
+    - name: Pack
+      run: dotnet pack -c release ./src/Gnu.Getopt
