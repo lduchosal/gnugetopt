@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          dotnet build
+          dotnet build src
           ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
