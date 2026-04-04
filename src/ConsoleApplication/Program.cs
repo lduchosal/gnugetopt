@@ -47,7 +47,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('C', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -59,7 +59,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('o', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -71,7 +71,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('S', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -126,10 +126,6 @@ namespace ConsoleApplication
             else if (ac.Action == ProgramAction.ListIPAddress)
             {
                 Program.ListIPAddress(ac);
-
-                // TODO: Need a better way to do SubtractNetwork
-                // } else if (ac.Action == ProgramAction.SubtractNetwork) {
-                //     Program.SubtractNetwork(ac);
             }
             else
             {
@@ -234,7 +230,7 @@ namespace ConsoleApplication
             List<string> ipnetworks = new List<string>();
             foreach (string ips in ac.NetworksString)
             {
-                if (!Program.TryParseIPNetwork(ips, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, ips);
                     continue;
@@ -246,9 +242,8 @@ namespace ConsoleApplication
             ac.Networks = ipnetworks.ToArray();
         }
 
-        private static bool TryParseIPNetwork(string? ip, CidrParseMode cidrParseEnum, byte cidr, out string? ipn)
+        private static bool TryParseIPNetwork(CidrParseMode cidrParseEnum, out string? ipn)
         {
-            string? ipnetwork = null;
             if (cidrParseEnum == CidrParseMode.Default)
             {
                 ipn = "1.1.1.1/8";
@@ -260,7 +255,7 @@ namespace ConsoleApplication
                 return true;
             }
 
-            ipn = ipnetwork;
+            ipn = null;
             return true;
         }
 
