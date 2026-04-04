@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  nuget:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore
+      run: dotnet restore ./src --verbosity m
+
+    - name: Build
+      run: dotnet build ./src -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageVersion=${{ github.event.release.tag_name }} --no-restore
+
+    - name: Test
+      run: dotnet test src/TestProject/TestProject.csproj -c Release --no-build
+
+    - name: Pack
+      run: dotnet pack src/Gnu.Getopt -c Release /p:PackageVersion=${{ github.event.release.tag_name }} --no-build
+
+    - name: Upload nupkg to GitHub Release
+      run: gh release upload "${{ github.event.release.tag_name }}" src/Gnu.Getopt/bin/Release/*.nupkg --clobber
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push to NuGet
+      run: dotnet nuget push src/Gnu.Getopt/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}

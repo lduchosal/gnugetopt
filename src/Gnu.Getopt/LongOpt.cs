@@ -24,14 +24,14 @@
 /* Boston, MA  02111-1307 USA
 /**************************************************************************/
 
-using System;
-using System.Globalization;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-
 namespace Gnu.Getopt
 {
+    using System;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Resources;
+    using System.Text;
+
     /// <summary>
     /// Constant enumeration values used for the LongOpt <c>hasArg</c>
     /// constructor argument.
@@ -63,13 +63,11 @@ namespace Gnu.Getopt
     /// for a given parsing session. Refer to the <see cref="Getopt"/>
     /// documentation for details on the format of long options.
     /// </summary>
-    /// <seealso cref="Getopt">Getopt</seealso>
-    /// <author>Aaron M. Renn (arenn@urbanophile.com)</author>
-    /// <author>Klaus Pr�ckl (klaus.prueckl@aon.at)</author>
+    /// <seealso cref="Getopt">Getopt.</seealso>
+    /// <author>Aaron M. Renn (arenn@urbanophile.com).</author>
+    /// <author>Klaus Pr�ckl (klaus.prueckl@aon.at).</author>
     public class LongOpt
     {
-        #region Instance Variables
-
         /// <summary>
         /// The name of the long option.
         /// </summary>
@@ -107,9 +105,6 @@ namespace Gnu.Getopt
         /// enabled).
         /// </summary>
         private readonly CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LongOpt"/> class.
@@ -168,6 +163,7 @@ namespace Gnu.Getopt
             {
                 object[] msgArgs = new object[] { hasArg };
                 throw new System.ArgumentException(string.Format(
+                    CultureInfo.InvariantCulture,
                     this.resManager.GetString(
                         "getopt.invalidValue",
                         this.cultureInfo), msgArgs));
@@ -179,13 +175,12 @@ namespace Gnu.Getopt
             this.flag = flag;
             this.val = val;
         }
-        #endregion
 
         /// <summary>
-        /// Returns the name of this LongOpt as a string
+        /// Gets the name of this LongOpt as a string.
         /// </summary>
         /// <returns>
-        /// The name of the long option
+        /// The name of the long option.
         /// </returns>
         public string Name
         {
@@ -193,7 +188,7 @@ namespace Gnu.Getopt
         }
 
         /// <summary>
-        /// Returns the value set for the <c>hasArg</c> field for this long
+        /// Gets the value set for the <c>hasArg</c> field for this long
         /// option.
         /// </summary>
         /// <returns>
@@ -205,7 +200,7 @@ namespace Gnu.Getopt
         }
 
         /// <summary>
-        /// Returns the value of the <c>flag</c> field for this long option.
+        /// Gets the value of the <c>flag</c> field for this long option.
         /// </summary>
         /// <returns>
         /// The value of <c>flag</c>.
@@ -216,7 +211,7 @@ namespace Gnu.Getopt
         }
 
         /// <summary>
-        /// Returns the value of the <c>val</c> field for this long option.
+        /// Gets the value of the <c>val</c> field for this long option.
         /// </summary>
         /// <returns>
         /// The value of <c>val</c>.
