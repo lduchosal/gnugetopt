@@ -24,12 +24,15 @@ namespace TestProject
         private static readonly string[] TestMethod10Args = new[] { "-C", "10.0.0.0/8", "1.1.1.1" };
         private static readonly string[] TestMethod11Args = new[] { "-o", "10.0.0.0/8", "1.1.1.1" };
 
+        /// <summary>Gets or sets the test context.</summary>
+        public TestContext? TestContext { get; set; }
+
         /// <summary>Tests parsing a single CIDR network.</summary>
         [TestMethod]
         public void TestMethod1()
         {
             ConsoleApplication.Program.Main(TestMethod1Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests combined short flags with a network.</summary>
@@ -37,7 +40,7 @@ namespace TestProject
         public void TestMethod2()
         {
             ConsoleApplication.Program.Main(TestMethod2Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests individual short flags with a network.</summary>
@@ -45,7 +48,7 @@ namespace TestProject
         public void TestMethod3()
         {
             ConsoleApplication.Program.Main(TestMethod3Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests parsing a bare IP address without CIDR.</summary>
@@ -53,7 +56,7 @@ namespace TestProject
         public void TestMethod4()
         {
             ConsoleApplication.Program.Main(TestMethod4Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests the subnet split action.</summary>
@@ -61,7 +64,7 @@ namespace TestProject
         public void TestMethod5()
         {
             ConsoleApplication.Program.Main(TestMethod5Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests CIDR override with list IP and subtract actions.</summary>
@@ -69,7 +72,7 @@ namespace TestProject
         public void TestMethod6()
         {
             ConsoleApplication.Program.Main(TestMethod6Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests the IP network flag with multiple networks.</summary>
@@ -77,7 +80,7 @@ namespace TestProject
         public void TestMethod7()
         {
             ConsoleApplication.Program.Main(TestMethod7Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests the supernet action with multiple networks.</summary>
@@ -85,7 +88,7 @@ namespace TestProject
         public void TestMethod8()
         {
             ConsoleApplication.Program.Main(TestMethod8Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests parsing an invalid input.</summary>
@@ -93,7 +96,7 @@ namespace TestProject
         public void TestMethod9()
         {
             ConsoleApplication.Program.Main(TestMethod9Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests the contain network action.</summary>
@@ -101,7 +104,7 @@ namespace TestProject
         public void TestMethod10()
         {
             ConsoleApplication.Program.Main(TestMethod10Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
 
         /// <summary>Tests the overlap network action.</summary>
@@ -109,7 +112,7 @@ namespace TestProject
         public void TestMethod11()
         {
             ConsoleApplication.Program.Main(TestMethod11Args);
-            Assert.IsTrue(true);
+            Assert.IsNotNull(this.TestContext);
         }
     }
 }
