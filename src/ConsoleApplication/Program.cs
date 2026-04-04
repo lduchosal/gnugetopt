@@ -13,7 +13,7 @@ namespace ConsoleApplication
     /// <summary>
     /// IP network manipulation tool demonstrating GNU getopt usage.
     /// </summary>
-    public static class Program
+    internal static class Program
     {
         private const string UnableToParseMessage = "Unable to parse ipnetwork {0}";
 
@@ -47,7 +47,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('C', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out string? ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -59,7 +59,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('o', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out string? ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -71,7 +71,7 @@ namespace ConsoleApplication
             }),
             new ArgParsed('S', (ac, arg) =>
             {
-                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out string? ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ProgramAction.Usage;
@@ -230,7 +230,7 @@ namespace ConsoleApplication
             List<string> ipnetworks = new List<string>();
             foreach (string ips in ac.NetworksString)
             {
-                if (!Program.TryParseIPNetwork(ac.CidrParse, out var ipnetwork))
+                if (!Program.TryParseIPNetwork(ac.CidrParse, out string? ipnetwork))
                 {
                     Console.WriteLine(UnableToParseMessage, ips);
                     continue;

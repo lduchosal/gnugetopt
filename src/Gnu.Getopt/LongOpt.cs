@@ -69,31 +69,6 @@ namespace Gnu.Getopt
     public class LongOpt
     {
         /// <summary>
-        /// The name of the long option.
-        /// </summary>
-        private readonly string name;
-
-        /// <summary>
-        /// Indicates whether the option has no argument, a required argument,
-        /// or an optional argument.
-        /// </summary>
-        private readonly Argument hasArg;
-
-        /// <summary>
-        /// If this variable is not null, then the value stored in <c>val</c>
-        /// is stored here when this long option is encountered. If this is
-        /// null, the value stored in <c>val</c> is treated as the name of an
-        /// equivalent short option.
-        /// </summary>
-        private readonly StringBuilder flag;
-
-        /// <summary>
-        /// The value to store in <c>flag</c> if flag is not null, otherwise
-        /// the equivalent short option character for this long option.
-        /// </summary>
-        private readonly int val;
-
-        /// <summary>
         /// The localized strings are kept in the resources, which can be
         /// accessed by the <see cref="ResourceManager"/> class.
         /// </summary>
@@ -170,10 +145,10 @@ namespace Gnu.Getopt
             }
 
             // Store off values
-            this.name = name;
-            this.hasArg = hasArg;
-            this.flag = flag;
-            this.val = val;
+            this.Name = name;
+            this.HasArg = hasArg;
+            this.Flag = flag;
+            this.Val = val;
         }
 
         /// <summary>
@@ -182,10 +157,7 @@ namespace Gnu.Getopt
         /// <returns>
         /// The name of the long option.
         /// </returns>
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the value set for the <c>hasArg</c> field for this long
@@ -194,10 +166,7 @@ namespace Gnu.Getopt
         /// <returns>
         /// The value of <c>hasArg</c>.
         /// </returns>
-        public Argument HasArg
-        {
-            get { return this.hasArg; }
-        }
+        public Argument HasArg { get; }
 
         /// <summary>
         /// Gets the value of the <c>flag</c> field for this long option.
@@ -205,10 +174,7 @@ namespace Gnu.Getopt
         /// <returns>
         /// The value of <c>flag</c>.
         /// </returns>
-        public StringBuilder Flag
-        {
-            get { return this.flag; }
-        }
+        public StringBuilder Flag { get; }
 
         /// <summary>
         /// Gets the value of the <c>val</c> field for this long option.
@@ -216,9 +182,6 @@ namespace Gnu.Getopt
         /// <returns>
         /// The value of <c>val</c>.
         /// </returns>
-        public int Val
-        {
-            get { return this.val; }
-        }
+        public int Val { get; }
     } // Class LongOpt
 }

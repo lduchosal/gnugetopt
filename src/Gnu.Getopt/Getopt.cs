@@ -29,7 +29,6 @@ namespace Gnu.Getopt
 {
     using System;
     using System.Globalization;
-    using System.Reflection;
     using System.Resources;
     using System.Text;
 
@@ -477,32 +476,6 @@ namespace Gnu.Getopt
         private readonly CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
 
         /// <summary>
-        /// For communication from <see cref="getopt"/> to the caller. When
-        /// <see cref="getopt"/> finds an option that takes an argument, the
-        /// argument value is returned here. Also, when <c>ordering</c> is
-        /// <see cref="Order.ReturnInOrder"/>, each non-option ARGV-element is
-        /// returned here.
-        /// </summary>
-        private string? optarg;
-
-        /// <summary>
-        /// Index in ARGV of the next element to be scanned. This is used for
-        /// communication to and from the caller and for communication between
-        /// successive calls to <see cref="getopt"/>.
-        ///
-        /// On entry to <see cref="getopt"/>, zero means this is the first
-        /// call; initialize.
-        ///
-        /// When <see cref="getopt"/> returns -1, this is the index of the
-        /// first of the non-option elements that the caller should itself
-        /// scan.
-        ///
-        /// Otherwise, <see cref="getopt"/> communicates from one call to the
-        /// next how much of ARGV has been scanned so far.
-        /// </summary>
-        private int optopt = '?';
-
-        /// <summary>
         /// The next char to be scanned in the option-element in which the last
         /// option character we returned was found. This allows us to pick up
         /// the scan where we left off.
@@ -516,12 +489,6 @@ namespace Gnu.Getopt
         /// This is the string describing the valid short options.
         /// </summary>
         private string optstring;
-
-        /// <summary>
-        /// Stores the index into the <c>longOptions</c> array of the long
-        /// option found.
-        /// </summary>
-        private int longind;
 
         /// <summary>
         /// A flag which communicates whether or not
@@ -787,10 +754,7 @@ namespace Gnu.Getopt
         /// returned here. No set method is provided because setting this
         /// variable has no effect.
         /// </summary>
-        public string? Optarg
-        {
-            get { return this.optarg; }
-        }
+        public string? Optarg { get; private set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether error messages are printed.
@@ -807,19 +771,13 @@ namespace Gnu.Getopt
         /// no corresponding set method because setting this variable has no
         /// effect.
         /// </summary>
-        public int Optopt
-        {
-            get { return this.optopt; }
-        }
+        public int Optopt { get; private set; } = '?';
 
         /// <summary>
         /// Gets the index into the array of long options (NOT argv)
         /// representing the long option that was found.
         /// </summary>
-        public int Longind
-        {
-            get { return this.longind; }
-        }
+        public int Longind { get; private set; }
 
         /// <summary>
         /// Produce an optstring suitable for the Getopt constructor
@@ -869,7 +827,7 @@ namespace Gnu.Getopt
         public int getopt() // not capitalized because of an compiler error
 #pragma warning restore SA1300
         {
-            this.optarg = null;
+            this.Optarg = null;
 
             if (this.endparse)
             {
@@ -968,7 +926,7 @@ namespace Gnu.Getopt
                         return -1;
                     }
 
-                    this.optarg = this.Argv[this.Optind++];
+                    this.Optarg = this.Argv[this.Optind++];
                     return 1;
                 }
 
@@ -1047,7 +1005,7 @@ namespace Gnu.Getopt
 
                     this.nextchar = string.Empty;
                     ++this.Optind;
-                    this.optopt = 0;
+                    this.Optopt = 0;
 
                     return '?';
                 }
@@ -1105,7 +1063,7 @@ namespace Gnu.Getopt
                     }
                 }
 
-                this.optopt = c2;
+                this.Optopt = c2;
 
                 return '?';
             }
@@ -1115,7 +1073,7 @@ namespace Gnu.Getopt
             {
                 if (this.nextchar.Length != 0)
                 {
-                    this.optarg = this.nextchar;
+                    this.Optarg = this.nextchar;
                 }
 
                 // No further cars in this argv element and no more argv
@@ -1135,7 +1093,7 @@ namespace Gnu.Getopt
                                 this.cultureInfo), msgArgs);
                     }
 
-                    this.optopt = c2;
+                    this.Optopt = c2;
                     if (this.optstring[0] == ':')
                     {
                         return ':';
@@ -1150,7 +1108,7 @@ namespace Gnu.Getopt
                     // We already incremented `optind' once; increment it again
                     // when taking next ARGV-elt as argument.
                     this.nextchar = this.Argv[this.Optind];
-                    this.optarg = this.Argv[this.Optind];
+                    this.Optarg = this.Argv[this.Optind];
                 }
 
                 c2 = this.CheckLongOption();
@@ -1176,12 +1134,12 @@ namespace Gnu.Getopt
                     // This is an option that accepts and argument optionally
                     if (this.nextchar.Length != 0)
                     {
-                        this.optarg = this.nextchar;
+                        this.Optarg = this.nextchar;
                         ++this.Optind;
                     }
                     else
                     {
-                        this.optarg = null;
+                        this.Optarg = null;
                     }
 
                     this.nextchar = null;
@@ -1190,7 +1148,7 @@ namespace Gnu.Getopt
                 {
                     if (this.nextchar.Length != 0)
                     {
-                        this.optarg = this.nextchar;
+                        this.Optarg = this.nextchar;
                         ++this.Optind;
                     }
                     else if (this.Optind == this.Argv.Length)
@@ -1208,7 +1166,7 @@ namespace Gnu.Getopt
                                     this.cultureInfo), msgArgs);
                         }
 
-                        this.optopt = c2;
+                        this.Optopt = c2;
 
                         if (this.optstring[0] == ':')
                         {
@@ -1221,14 +1179,14 @@ namespace Gnu.Getopt
                     }
                     else
                     {
-                        this.optarg = this.Argv[this.Optind];
+                        this.Optarg = this.Argv[this.Optind];
                         ++this.Optind;
 
                         // Ok, here's an obscure Posix case.  If we have o:,
                         // and we get -o -- foo, then we're supposed to skip
                         // the --, end parsing of options, and make foo an
                         // operand to -o. Only do this in Posix mode.
-                        if (this.posixlyCorrect && this.optarg.Equals("--", StringComparison.Ordinal))
+                        if (this.posixlyCorrect && this.Optarg.Equals("--", StringComparison.Ordinal))
                         {
                             // If end of argv, error out
                             if (this.Optind == this.Argv.Length)
@@ -1247,7 +1205,7 @@ namespace Gnu.Getopt
                                         msgArgs);
                                 }
 
-                                this.optopt = c2;
+                                this.Optopt = c2;
 
                                 if (this.optstring[0] == ':')
                                 {
@@ -1262,7 +1220,7 @@ namespace Gnu.Getopt
                             // Set new optarg and set to end. Don't permute as
                             // we do on -- up above since we know we aren't in
                             // permute mode because of Posix.
-                            this.optarg = this.Argv[this.Optind];
+                            this.Optarg = this.Argv[this.Optind];
                             ++this.Optind;
                             this.firstNonopt = this.Optind;
                             this.lastNonopt = this.Argv.Length;
@@ -1353,7 +1311,7 @@ namespace Gnu.Getopt
             this.longoptHandled = true;
             ambig = false;
             exact = false;
-            this.longind = -1;
+            this.Longind = -1;
 
             nameend = this.nextchar!.IndexOf("=", StringComparison.Ordinal);
             if (nameend == -1)
@@ -1373,7 +1331,7 @@ namespace Gnu.Getopt
                     {
                         // Exact match found
                         pfound = this.longOptions[i];
-                        this.longind = i;
+                        this.Longind = i;
                         exact = true;
                         break;
                     }
@@ -1381,7 +1339,7 @@ namespace Gnu.Getopt
                     {
                         // First nonexact match found
                         pfound = this.longOptions[i];
-                        this.longind = i;
+                        this.Longind = i;
                     }
                     else
                     {
@@ -1407,7 +1365,7 @@ namespace Gnu.Getopt
                 }
 
                 this.nextchar = string.Empty;
-                this.optopt = 0;
+                this.Optopt = 0;
                 ++this.Optind;
 
                 return '?';
@@ -1423,11 +1381,11 @@ namespace Gnu.Getopt
                     {
                         if (this.nextchar.Substring(nameend).Length > 1)
                         {
-                            this.optarg = this.nextchar.Substring(nameend + 1);
+                            this.Optarg = this.nextchar.Substring(nameend + 1);
                         }
                         else
                         {
-                            this.optarg = string.Empty;
+                            this.Optarg = string.Empty;
                         }
                     }
                     else
@@ -1463,7 +1421,7 @@ namespace Gnu.Getopt
                         }
 
                         this.nextchar = string.Empty;
-                        this.optopt = pfound.Val;
+                        this.Optopt = pfound.Val;
 
                         return '?';
                     }
@@ -1472,7 +1430,7 @@ namespace Gnu.Getopt
                 {
                     if (this.Optind < this.Argv.Length)
                     {
-                        this.optarg = this.Argv[this.Optind];
+                        this.Optarg = this.Argv[this.Optind];
                         ++this.Optind;
                     }
                     else
@@ -1490,7 +1448,7 @@ namespace Gnu.Getopt
                         }
 
                         this.nextchar = string.Empty;
-                        this.optopt = pfound.Val;
+                        this.Optopt = pfound.Val;
                         if (this.optstring[0] == ':')
                         {
                             return ':';

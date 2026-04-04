@@ -7,7 +7,7 @@ namespace ConsoleApplication
     /// <summary>
     /// CIDR parsing mode for network addresses.
     /// </summary>
-    public enum CidrParseMode
+    internal enum CidrParseMode
     {
         /// <summary>Use the default CIDR based on class (A/8, B/16, C/24).</summary>
         Default,
