@@ -217,8 +217,8 @@ dotnet_diagnostic.CA1819.severity = suggestion
 # CA1724: Type name conflicts with namespace
 dotnet_diagnostic.CA1724.severity = suggestion
 
-# CA1303: Do not pass literals as localized parameters
-dotnet_diagnostic.CA1303.severity = suggestion
+# CA1303: Do not pass literals as localized parameters (library already uses ResourceManager)
+dotnet_diagnostic.CA1303.severity = none
 
 # CA1515: Types in applications should be internal
 dotnet_diagnostic.CA1515.severity = suggestion
