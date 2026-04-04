@@ -72,7 +72,7 @@ namespace Gnu.Getopt
         /// The localized strings are kept in the resources, which can be
         /// accessed by the <see cref="ResourceManager"/> class.
         /// </summary>
-        private readonly ResourceManager resManager = new ResourceManager(
+        private readonly ResourceManager resManager = new(
             "Gnu.Getopt.MessagesBundle", typeof(LongOpt).GetTypeInfo().Assembly);
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace Gnu.Getopt
             }
 
             // Validate hasArg
-            if ((hasArg != Argument.No) && (hasArg != Argument.Required) &&
-                (hasArg != Argument.Optional))
+            if (hasArg is not Argument.No and not Argument.Required and
+                not Argument.Optional)
             {
                 object[] msgArgs = new object[] { hasArg };
                 throw new System.ArgumentException(string.Format(

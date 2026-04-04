@@ -1,4 +1,4 @@
-﻿// <copyright file="AssemblyInfo.cs" company="IPNetwork">
+// <copyright file="AssemblyInfo.cs" company="IPNetwork">
 // Copyright (c) IPNetwork. All rights reserved.
 // </copyright>
 

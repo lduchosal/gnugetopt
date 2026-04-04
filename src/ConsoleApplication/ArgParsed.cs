@@ -7,7 +7,7 @@ namespace ConsoleApplication
     /// <summary>
     /// Maps a parsed option character to a callback handler.
     /// </summary>
-    internal sealed class ArgParsed
+    public sealed class ArgParsed
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgParsed"/> class.
@@ -25,7 +25,7 @@ namespace ConsoleApplication
         /// </summary>
         /// <param name="ac">The program context.</param>
         /// <param name="arg">The option argument value, if any.</param>
-        internal delegate void ArgParsedHandler(ProgramContext ac, string? arg);
+        public delegate void ArgParsedHandler(ProgramContext ac, string? arg);
 
         private event ArgParsedHandler OnArgParsed;
 

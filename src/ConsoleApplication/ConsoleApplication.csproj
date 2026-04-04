@@ -12,10 +12,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="TestProject" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Gnu.Getopt\Gnu.Getopt.csproj" />
   </ItemGroup>
 

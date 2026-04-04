@@ -703,10 +703,7 @@ namespace Gnu.Getopt
         /// </summary>
         public string Optstring
         {
-            get
-            {
-                return this.optstring;
-            }
+            get => this.optstring;
 
             set
             {
@@ -788,18 +785,18 @@ namespace Gnu.Getopt
         /// <returns>A string of short option characters derived from the long options.</returns>
         public static string Digest(LongOpt[] longOpts)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (LongOpt o in longOpts)
             {
-                sb.Append((char)o.Val);
+                _ = sb.Append((char)o.Val);
                 if (o.HasArg == Argument.Optional)
                 {
-                    sb.Append("::");
+                    _ = sb.Append("::");
                 }
 
                 if (o.HasArg == Argument.Required)
                 {
-                    sb.Append(':');
+                    _ = sb.Append(':');
                 }
             }
 
@@ -932,14 +929,9 @@ namespace Gnu.Getopt
 
                 // We have found another option-ARGV-element.
                 // Skip the initial punctuation.
-                if (this.Argv[this.Optind].StartsWith("--", StringComparison.Ordinal))
-                {
-                    this.nextchar = this.Argv[this.Optind].Substring(2);
-                }
-                else
-                {
-                    this.nextchar = this.Argv[this.Optind].Substring(1);
-                }
+                this.nextchar = this.Argv[this.Optind].StartsWith("--", StringComparison.Ordinal)
+                    ? this.Argv[this.Optind].Substring(2)
+                    : this.Argv[this.Optind].Substring(1);
             }
 
             // Decode the current option-ARGV-element.
@@ -1013,14 +1005,9 @@ namespace Gnu.Getopt
 
             // Look at and handle the next short option-character */
             int c2 = this.nextchar[0]; // **** Do we need to check for empty str?
-            if (this.nextchar.Length > 1)
-            {
-                this.nextchar = this.nextchar.Substring(1);
-            }
-            else
-            {
-                this.nextchar = string.Empty;
-            }
+            this.nextchar = this.nextchar.Length > 1
+                ? this.nextchar.Substring(1)
+                : string.Empty;
 
             string? temp = null;
             if (this.optstring.IndexOf((char)c2) != -1)
@@ -1094,14 +1081,8 @@ namespace Gnu.Getopt
                     }
 
                     this.Optopt = c2;
-                    if (this.optstring[0] == ':')
-                    {
-                        return ':';
-                    }
-                    else
-                    {
-                        return '?';
-                    }
+
+                    return this.optstring[0] == ':' ? ':' : '?';
                 }
                 else
                 {
@@ -1168,14 +1149,7 @@ namespace Gnu.Getopt
 
                         this.Optopt = c2;
 
-                        if (this.optstring[0] == ':')
-                        {
-                            return ':';
-                        }
-                        else
-                        {
-                            return '?';
-                        }
+                        return this.optstring[0] == ':' ? ':' : '?';
                     }
                     else
                     {
@@ -1207,14 +1181,7 @@ namespace Gnu.Getopt
 
                                 this.Optopt = c2;
 
-                                if (this.optstring[0] == ':')
-                                {
-                                    return ':';
-                                }
-                                else
-                                {
-                                    return '?';
-                                }
+                                return this.optstring[0] == ':' ? ':' : '?';
                             }
 
                             // Set new optarg and set to end. Don't permute as
@@ -1379,14 +1346,9 @@ namespace Gnu.Getopt
                 {
                     if (pfound.HasArg != Argument.No)
                     {
-                        if (this.nextchar.Substring(nameend).Length > 1)
-                        {
-                            this.Optarg = this.nextchar.Substring(nameend + 1);
-                        }
-                        else
-                        {
-                            this.Optarg = string.Empty;
-                        }
+                        this.Optarg = this.nextchar.Substring(nameend).Length > 1
+                            ? this.nextchar.Substring(nameend + 1)
+                            : string.Empty;
                     }
                     else
                     {
@@ -1449,14 +1411,8 @@ namespace Gnu.Getopt
 
                         this.nextchar = string.Empty;
                         this.Optopt = pfound.Val;
-                        if (this.optstring[0] == ':')
-                        {
-                            return ':';
-                        }
-                        else
-                        {
-                            return '?';
-                        }
+
+                        return this.optstring[0] == ':' ? ':' : '?';
                     }
                 } // else if (pfound)
 
@@ -1465,7 +1421,7 @@ namespace Gnu.Getopt
                 if (pfound.Flag != null)
                 {
                     pfound.Flag.Length = 0;
-                    pfound.Flag.Append(pfound.Val);
+                    _ = pfound.Flag.Append(pfound.Val);
 
                     return 0;
                 }

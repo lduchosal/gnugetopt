@@ -9,7 +9,7 @@ namespace ConsoleApplication
     /// <summary>
     /// Holds the parsed command-line options and state for the program.
     /// </summary>
-    internal sealed class ProgramContext
+    public sealed class ProgramContext
     {
         /// <summary>Gets or sets a value indicating whether to print the IP network.</summary>
         public bool IPNetwork { get; set; }

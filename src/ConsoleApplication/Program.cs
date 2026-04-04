@@ -13,7 +13,7 @@ namespace ConsoleApplication
     /// <summary>
     /// IP network manipulation tool demonstrating GNU getopt usage.
     /// </summary>
-    internal static class Program
+    public static class Program
     {
         private const string UnableToParseMessage = "Unable to parse ipnetwork {0}";
 

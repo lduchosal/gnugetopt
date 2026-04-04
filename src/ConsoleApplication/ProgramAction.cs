@@ -7,7 +7,7 @@ namespace ConsoleApplication
     /// <summary>
     /// Available actions the program can perform.
     /// </summary>
-    internal enum ProgramAction
+    public enum ProgramAction
     {
         /// <summary>Print usage information.</summary>
         Usage,
