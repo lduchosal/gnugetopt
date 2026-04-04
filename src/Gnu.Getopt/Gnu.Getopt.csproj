@@ -5,10 +5,9 @@
     	  <PackageId>GnuGetOpt</PackageId>
     <PackageVersion>1.0.0</PackageVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PackageLicenseUrl>https://github.com/lduchosal/gnugetopt/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/lduchosal/gnugetopt</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>getopt gnu console arg parse</PackageTags>
 
     <Title>GnuGetOpt .NET</Title>
@@ -40,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
