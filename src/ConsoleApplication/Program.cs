@@ -5,14 +5,14 @@
 using Gnu.Getopt;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Numerics;
 using System.Reflection;
 
 namespace System.Net.ConsoleApplication
 {
-    public class Program
+    public static class Program
     {
+        private const string UnableToParseMessage = "Unable to parse ipnetwork {0}";
+
         public static void Main(string[] args)
         {
             ProgramContext ac = Program.ParseArgs(args);
@@ -83,32 +83,14 @@ namespace System.Net.ConsoleApplication
             Console.WriteLine("SupernetNetworks {0}", ac.Networks.ToString());
         }
 
-        private static void PrintNetworks(ProgramContext ac, IEnumerable<string> ipnetworks, BigInteger networkLength)
-        {
-            Console.WriteLine("PrintNetworks {0} {1}", ipnetworks.ToString(), networkLength);
-        }
-
         private static void SubnetNetworks(ProgramContext ac)
         {
             Console.WriteLine("SubnetNetworks {0}", ac.Networks.ToString());
         }
 
-        private static void PrintSeparator(BigInteger max, BigInteger index)
-        {
-            if (max > 1 && index != max)
-            {
-                Console.WriteLine("--");
-            }
-        }
-
         private static void PrintNetworks(ProgramContext ac)
         {
             Console.WriteLine("PrintNetworks {0}", ac.Networks.ToString());
-        }
-
-        private static void PrintNetwork(ProgramContext ac, string ipn)
-        {
-            Console.WriteLine("PrintNetwork {0}", ipn.ToString());
         }
 
         private static readonly Dictionary<int, ArgParsed> Args = new Dictionary<int, ArgParsed>();
@@ -143,7 +125,7 @@ namespace System.Net.ConsoleApplication
             {
                 if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
                 {
-                    Console.WriteLine("Unable to parse ipnetwork {0}", arg);
+                    Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ActionEnum.Usage;
                     return;
                 }
@@ -155,7 +137,7 @@ namespace System.Net.ConsoleApplication
             {
                 if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
                 {
-                    Console.WriteLine("Unable to parse ipnetwork {0}", arg);
+                    Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ActionEnum.Usage;
                     return;
                 }
@@ -167,7 +149,7 @@ namespace System.Net.ConsoleApplication
             {
                 if (!Program.TryParseIPNetwork(arg, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
                 {
-                    Console.WriteLine("Unable to parse ipnetwork {0}", arg);
+                    Console.WriteLine(UnableToParseMessage, arg);
                     ac.Action = ActionEnum.Usage;
                     return;
                 }
@@ -249,7 +231,7 @@ namespace System.Net.ConsoleApplication
             {
                 if (!Program.TryParseIPNetwork(ips, ac.CidrParse, ac.CidrParsed, out var ipnetwork))
                 {
-                    Console.WriteLine("Unable to parse ipnetwork {0}", ips);
+                    Console.WriteLine(UnableToParseMessage, ips);
                     continue;
                 }
 
@@ -284,15 +266,15 @@ namespace System.Net.ConsoleApplication
                 throw new ArgumentNullException(nameof(ac));
             }
 
-            return ac.IPNetwork == false
-                  && ac.Network == false
-                  && ac.Netmask == false
-                  && ac.Cidr == false
-                  && ac.Broadcast == false
-                  && ac.FirstUsable == false
-                  && ac.LastUsable == false
-                  && ac.Total == false
-                  && ac.Usable == false;
+            return !ac.IPNetwork
+                  && !ac.Network
+                  && !ac.Netmask
+                  && !ac.Cidr
+                  && !ac.Broadcast
+                  && !ac.FirstUsable
+                  && !ac.LastUsable
+                  && !ac.Total
+                  && !ac.Usable;
         }
 
         private static void PrintAll(ProgramContext ac)

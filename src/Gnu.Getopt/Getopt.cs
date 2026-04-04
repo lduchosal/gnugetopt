@@ -7,7 +7,7 @@
 /*
 /* Copyright (c) 1987-1997 Free Software Foundation, Inc.
 /* Java Port Copyright (c) 1998 by Aaron M. Renn (arenn@urbanophile.com)
-/* C#.NET Port Copyright (c) 2004 by Klaus Prückl (klaus.prueckl@aon.at)
+/* C#.NET Port Copyright (c) 2004 by Klaus Prï¿½ckl (klaus.prueckl@aon.at)
 /*
 /* This program is free software; you can redistribute it and/or modify
 /* it under the terms of the GNU Library General Public License as published
@@ -429,7 +429,7 @@ namespace Gnu.Getopt
     /// <author>Roland McGrath (roland@gnu.ai.mit.edu)</author>
     /// <author>Ulrich Drepper (drepper@cygnus.com)</author>
     /// <author>Aaron M. Renn (arenn@urbanophile.com)</author>
-    /// <author>Klaus Prückl (klaus.prueckl@aon.at)</author>
+    /// <author>Klaus Prï¿½ckl (klaus.prueckl@aon.at)</author>
     /// <author>Sean M. Foy (sean.foy@gmail.com)</author>
     /// <seealso cref="LongOpt">LongOpt</seealso>
     public class Getopt
@@ -564,12 +564,12 @@ namespace Gnu.Getopt
         /// This is an array of <see cref="LongOpt"/> objects which describ the
         /// valid long options.
         /// </summary>
-        private LongOpt[] longOptions;
+        private readonly LongOpt[] longOptions;
 
         /// <summary>
         /// This flag determines whether or not we are parsing only long args.
         /// </summary>
-        private bool longOnly;
+        private readonly bool longOnly;
 
         /// <summary>
         /// Stores the index into the <c>longOptions</c> array of the long
@@ -581,7 +581,7 @@ namespace Gnu.Getopt
         /// The flag determines whether or not we operate in strict POSIX
         /// compliance.
         /// </summary>
-        private bool posixlyCorrect;
+        private readonly bool posixlyCorrect;
 
         /// <summary>
         /// A flag which communicates whether or not
@@ -614,25 +614,25 @@ namespace Gnu.Getopt
         /// <summary>
         /// Determines whether we permute arguments or not.
         /// </summary>
-        private Order ordering;
+        private readonly Order ordering;
 
         /// <summary>
         /// Name to print as the program name in error messages. This is
         /// necessary since .NET does not place the program name in args[0].
         /// </summary>
-        private string progname;
+        private readonly string progname;
 
         /// <summary>
         /// The localized strings are kept in the resources, which can be
         /// accessed by the <see cref="ResourceManager"/> class.
         /// </summary>
-        private ResourceManager resManager = Properties.Resources.ResourceManager;
+        private readonly ResourceManager resManager = Properties.Resources.ResourceManager;
 
         /// <summary>
         /// The current UI culture (set to en-US when posixly correctness is
         /// enabled).
         /// </summary>
-        private CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
+        private readonly CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
 
         #endregion
 
@@ -743,12 +743,6 @@ namespace Gnu.Getopt
             // "POSIXLY_CORRECT" environment variable in the C version
             try
             {
-                // if(false)
-                // {
-                // this.posixlyCorrect = true;
-                // this.cultureInfo = new CultureInfo("en-US");
-                // }
-                // else
                 this.posixlyCorrect = false;
             }
             catch (Exception)
@@ -773,12 +767,6 @@ namespace Gnu.Getopt
                     this.optstring = optstring.Substring(1);
                 }
             }
-
-            // always false
-            // else if (this.posixlyCorrect)
-            // {
-            // this.ordering = Order.RequireOrder;
-            // }
             else
             {
                 this.ordering = Order.Permute; // The normal default case
@@ -1132,7 +1120,7 @@ namespace Gnu.Getopt
                 }
 
                 return pfound.Val;
-            } // if (pfound != null)
+            }
 
             this.longoptHandled = false;
 
@@ -1160,7 +1148,7 @@ namespace Gnu.Getopt
         {
             this.optarg = null;
 
-            if (this.endparse == true)
+            if (this.endparse)
             {
                 return -1;
             }
