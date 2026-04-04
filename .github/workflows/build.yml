@@ -14,10 +14,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          distribution: 'zulu'
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -32,25 +32,24 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v4
         with:
-          path: ${{ runner.temp }}/scanner
+          path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarQube Cloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          New-Item -Path "${{ runner.temp }}/scanner" -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path "${{ runner.temp }}/scanner"
-      - name: Install dotnet-coverage
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Install coverlet
         shell: powershell
-        run: dotnet tool install --global dotnet-coverage
+        run: dotnet tool install --global coverlet.console
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SCANNER_PATH: ${{ runner.temp }}/scanner
         shell: powershell
         run: |
-          & "$env:SCANNER_PATH/dotnet-sonarscanner" begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
-          dotnet build src
-          dotnet-coverage collect "dotnet test src/TestProject" -f xml -o coverage.xml
-          & "$env:SCANNER_PATH/dotnet-sonarscanner" end /d:sonar.token="$env:SONAR_TOKEN"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml
+          dotnet build --no-incremental src
+          coverlet src\TestProject\bin\Debug\net8.0\TestProject.dll --target dotnet --targetargs "src\TestProject\bin\Debug\net8.0\TestProject.dll" --format opencover --output coverage.xml
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
