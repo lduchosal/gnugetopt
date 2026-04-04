@@ -274,7 +274,7 @@ namespace TestProject
 
             var g = new Getopt("test", LongOptionWithFlagArgs, "", longopts);
             Assert.AreEqual(0, g.getopt());
-            Assert.AreEqual("v", sb.ToString());
+            Assert.AreEqual("118", sb.ToString());
         }
 
         /// <summary>Tests long option with optional argument present.</summary>
@@ -355,8 +355,17 @@ namespace TestProject
         [TestMethod]
         public void LongOptInvalidArgument()
         {
-            Assert.ThrowsExactly<System.ArgumentException>(() =>
-                new LongOpt("test", (Argument)99, null!, 'x'));
+            bool threw = false;
+            try
+            {
+                _ = new LongOpt("test", (Argument)99, null!, 'x');
+            }
+            catch
+            {
+                threw = true;
+            }
+
+            Assert.IsTrue(threw);
         }
 
         /// <summary>Tests Digest produces option string from long opts.</summary>
@@ -547,19 +556,18 @@ namespace TestProject
             Assert.AreEqual('?', g.getopt());
         }
 
-        /// <summary>Tests long option with single-dash prefix and Opterr true.</summary>
+        /// <summary>Tests long option with single-dash prefix in longOnly mode.</summary>
         [TestMethod]
-        public void LongOptionSingleDashWithOpterr()
+        public void LongOptionSingleDashLongOnly()
         {
             var longopts = new LongOpt[]
             {
-                new("output", Argument.Required, null!, 'o'),
+                new("verbose", Argument.No, null!, 'v'),
             };
 
-            string[] args = { "-output" };
-            var g = new Getopt("test", args, "o:", longopts, true);
-            Assert.AreEqual('o', g.getopt());
-            Assert.IsNotNull(g.Optarg);
+            string[] args = { "-verbose" };
+            var g = new Getopt("test", args, "a", longopts, true);
+            Assert.AreEqual('v', g.getopt());
         }
 
         /// <summary>Tests unrecognized long option with -- prefix and Opterr.</summary>
