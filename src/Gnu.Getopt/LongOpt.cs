@@ -73,13 +73,13 @@ namespace Gnu.Getopt
         /// <summary>
         /// The name of the long option.
         /// </summary>
-        private string name;
+        private readonly string name;
 
         /// <summary>
         /// Indicates whether the option has no argument, a required argument,
         /// or an optional argument.
         /// </summary>
-        private Argument hasArg;
+        private readonly Argument hasArg;
 
         /// <summary>
         /// If this variable is not null, then the value stored in <c>val</c>
@@ -87,26 +87,26 @@ namespace Gnu.Getopt
         /// null, the value stored in <c>val</c> is treated as the name of an
         /// equivalent short option.
         /// </summary>
-        private StringBuilder flag;
+        private readonly StringBuilder flag;
 
         /// <summary>
         /// The value to store in <c>flag</c> if flag is not null, otherwise
         /// the equivalent short option character for this long option.
         /// </summary>
-        private int val;
+        private readonly int val;
 
         /// <summary>
         /// The localized strings are kept in the resources, which can be
         /// accessed by the <see cref="ResourceManager"/> class.
         /// </summary>
-        private ResourceManager resManager = new ResourceManager(
+        private readonly ResourceManager resManager = new ResourceManager(
             "Gnu.Getopt.MessagesBundle", typeof(LongOpt).GetTypeInfo().Assembly);
 
         /// <summary>
         /// The current UI culture (set to en-US when posixly correctness is
         /// enabled).
         /// </summary>
-        private CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
+        private readonly CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
         #endregion
 
         #region Constructors
