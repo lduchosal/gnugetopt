@@ -51,5 +51,5 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml
           dotnet build --no-incremental src
-          coverlet src\TestProject\bin\Debug\net8.0\TestProject.dll --target dotnet --targetargs "src\TestProject\bin\Debug\net8.0\TestProject.dll" --format opencover --output coverage.xml
+          coverlet src\TestProject\bin\Debug\net8.0\TestProject.dll --target dotnet --targetargs "test src\TestProject --no-build" --format opencover --output coverage.xml
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
