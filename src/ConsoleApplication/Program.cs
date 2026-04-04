@@ -17,7 +17,7 @@ namespace ConsoleApplication
     {
         private const string UnableToParseMessage = "Unable to parse ipnetwork {0}";
 
-        private static readonly Dictionary<int, ArgParsed> Args = new Dictionary<int, ArgParsed>();
+        private static readonly Dictionary<int, ArgParsed> Args = new();
         private static readonly ArgParsed[] ArgsList = new[]
         {
             new ArgParsed('i', (ac, arg) => { ac.IPNetwork = true; }),

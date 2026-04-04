@@ -224,8 +224,8 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("help", Argument.No, null!, 'h'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             var g = new Getopt("test", LongOptionBasicArgs, "ho:", longopts);
@@ -240,7 +240,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             var g = new Getopt("test", LongOptionRequiredArgEqualsArgs, "o:", longopts);
@@ -254,7 +254,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             var g = new Getopt("test", LongOptionRequiredArgNextElementArgs, "o:", longopts);
@@ -269,7 +269,7 @@ namespace TestProject
             var sb = new StringBuilder();
             var longopts = new LongOpt[]
             {
-                new LongOpt("verbose", Argument.No, sb, 'v'),
+                new("verbose", Argument.No, sb, 'v'),
             };
 
             var g = new Getopt("test", LongOptionWithFlagArgs, "", longopts);
@@ -283,7 +283,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("level", Argument.Optional, null!, 'l'),
+                new("level", Argument.Optional, null!, 'l'),
             };
 
             var g = new Getopt("test", LongOptionOptionalArgPresentArgs, "l::", longopts);
@@ -297,7 +297,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("level", Argument.Optional, null!, 'l'),
+                new("level", Argument.Optional, null!, 'l'),
             };
 
             var g = new Getopt("test", LongOptionOptionalArgAbsentArgs, "l::", longopts);
@@ -311,7 +311,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             var g = new Getopt("test", InvalidLongOptionArgs, "h", longopts) { Opterr = false };
@@ -324,7 +324,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             var g = new Getopt("test", LongOnlyModeArgs, "h", longopts, true);
@@ -365,9 +365,9 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("all", Argument.No, null!, 'a'),
-                new LongOpt("output", Argument.Required, null!, 'o'),
-                new LongOpt("level", Argument.Optional, null!, 'l'),
+                new("all", Argument.No, null!, 'a'),
+                new("output", Argument.Required, null!, 'o'),
+                new("level", Argument.Optional, null!, 'l'),
             };
 
             string result = Getopt.Digest(longopts);
@@ -380,7 +380,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("verbose", Argument.No, null!, 'v'),
+                new("verbose", Argument.No, null!, 'v'),
             };
 
             var g = new Getopt("test", ConstructorWithLongOptsNoShortArgs, "", longopts);
@@ -422,8 +422,8 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("verbose", Argument.No, null!, 'v'),
-                new LongOpt("version", Argument.No, null!, 'V'),
+                new("verbose", Argument.No, null!, 'v'),
+                new("version", Argument.No, null!, 'V'),
             };
 
             var g = new Getopt("test", AmbiguousLongOptionArgs, "vV", longopts) { Opterr = false };
@@ -436,7 +436,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             var g = new Getopt("test", LongOptionMissingRequiredArgArgs, "o:", longopts) { Opterr = false };
@@ -457,8 +457,8 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("verbose", Argument.No, null!, 'v'),
-                new LongOpt("version", Argument.No, null!, 'V'),
+                new("verbose", Argument.No, null!, 'v'),
+                new("version", Argument.No, null!, 'V'),
             };
 
             var g = new Getopt("test", AmbiguousLongOptionArgs, "vV", longopts);
@@ -471,7 +471,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "--help=foo" };
@@ -497,7 +497,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "-W", "help" };
@@ -511,7 +511,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "-W", "invalid" };
@@ -525,7 +525,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "-W" };
@@ -539,7 +539,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             string[] args = { "--output" };
@@ -553,7 +553,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             string[] args = { "-output" };
@@ -568,7 +568,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "--unknown" };
@@ -582,7 +582,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "-unknown" };
@@ -623,7 +623,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "--help" };
@@ -637,8 +637,8 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
-                new LongOpt("output", Argument.Required, null!, 'o'),
+                new("help", Argument.No, null!, 'h'),
+                new("output", Argument.Required, null!, 'o'),
             };
 
             string[] args = { "--ou=test.txt" };
@@ -674,7 +674,7 @@ namespace TestProject
         {
             var longopts = new LongOpt[]
             {
-                new LongOpt("help", Argument.No, null!, 'h'),
+                new("help", Argument.No, null!, 'h'),
             };
 
             string[] args = { "--help=foo" };
