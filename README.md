@@ -2,6 +2,7 @@
 
 C#.NET port of Java port of GNU getopt from glibc 2.0.6
 
+[![GitHub](https://img.shields.io/badge/github-lduchosal%2Fgnugetopt-blue?logo=github)](https://github.com/lduchosal/gnugetopt)
 [![NuGet](https://img.shields.io/nuget/v/GnuGetOpt)](https://www.nuget.org/packages/gnugetopt)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/GnuGetOpt)](https://www.nuget.org/packages/gnugetopt)
 [![Build](https://github.com/lduchosal/gnugetopt/actions/workflows/build.yml/badge.svg)](https://github.com/lduchosal/gnugetopt/actions/workflows/build.yml)
