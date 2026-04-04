@@ -437,9 +437,7 @@ namespace Gnu.Getopt
         /// This is an array of <see cref="LongOpt"/> objects which describ the
         /// valid long options.
         /// </summary>
-#pragma warning disable SA1011 // Closing square bracket should be followed by a space
         private readonly LongOpt[]? longOptions;
-#pragma warning restore SA1011
 
         /// <summary>
         /// This flag determines whether or not we are parsing only long args.
@@ -598,9 +596,7 @@ namespace Gnu.Getopt
             string progname,
             string[] argv,
             string optstring,
-#pragma warning disable SA1011 // Closing square bracket should be followed by a space
             LongOpt[]? longOptions,
-#pragma warning restore SA1011
             bool longOnly)
         {
             if (optstring.Length == 0)
@@ -820,9 +816,7 @@ namespace Gnu.Getopt
         /// <returns>
         /// Various things as described above.
         /// </returns>
-#pragma warning disable SA1300
-        public int getopt() // not capitalized because of an compiler error
-#pragma warning restore SA1300
+        public int getopt()
         {
             this.Optarg = null;
 
