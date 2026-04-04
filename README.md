@@ -5,9 +5,17 @@ C#.NET port of Java port of GNU getopt from glibc 2.0.6
 [![NuGet](https://img.shields.io/nuget/v/GnuGetOpt)](https://www.nuget.org/packages/gnugetopt)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/GnuGetOpt)](https://www.nuget.org/packages/gnugetopt)
 [![Build](https://github.com/lduchosal/gnugetopt/actions/workflows/dotnet.yml/badge.svg)](https://github.com/lduchosal/gnugetopt/actions/workflows/dotnet.yml)
-[![SonarCloud](https://github.com/lduchosal/gnugetopt/actions/workflows/build.yml/badge.svg)](https://github.com/lduchosal/gnugetopt/actions/workflows/build.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/lduchosal/gnugetopt)
 [![License](https://img.shields.io/github/license/lduchosal/gnugetopt)](LICENSE)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=coverage)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=bugs)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lduchosal_gnugetopt&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=lduchosal_gnugetopt)
 
 ## Installation
 

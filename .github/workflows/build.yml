@@ -32,25 +32,25 @@ jobs:
         id: cache-sonar-scanner
         uses: actions/cache@v4
         with:
-          path: ${{ runner.temp }}\scanner
+          path: ${{ runner.temp }}/scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Install SonarQube Cloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
-          New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
+          New-Item -Path "${{ runner.temp }}/scanner" -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path "${{ runner.temp }}/scanner"
       - name: Install dotnet-coverage
         shell: powershell
         run: dotnet tool install --global dotnet-coverage
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SCANNER_PATH: ${{ runner.temp }}\scanner
+          SCANNER_PATH: ${{ runner.temp }}/scanner
         shell: powershell
         run: |
-          $env:SCANNER_PATH\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          & "$env:SCANNER_PATH/dotnet-sonarscanner" begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build src
           dotnet-coverage collect "dotnet test src/TestProject" -f xml -o coverage.xml
-          $env:SCANNER_PATH\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
+          & "$env:SCANNER_PATH/dotnet-sonarscanner" end /d:sonar.token="$env:SONAR_TOKEN"
