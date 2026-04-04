@@ -43,9 +43,10 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SCANNER_PATH: ${{ runner.temp }}\scanner
         shell: powershell
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          $env:SCANNER_PATH\dotnet-sonarscanner begin /k:"lduchosal_gnugetopt" /o:"lduchosal" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build src
           dotnet-coverage collect "dotnet test src/TestProject" -f xml -o coverage.xml
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          $env:SCANNER_PATH\dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
