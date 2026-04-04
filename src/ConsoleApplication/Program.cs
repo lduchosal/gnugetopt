@@ -20,21 +20,21 @@ namespace ConsoleApplication
         private static readonly Dictionary<int, ArgParsed> Args = new();
         private static readonly ArgParsed[] ArgsList = new[]
         {
-            new ArgParsed('i', (ac, arg) => { ac.IPNetwork = true; }),
-            new ArgParsed('n', (ac, arg) => { ac.Network = true; }),
-            new ArgParsed('m', (ac, arg) => { ac.Netmask = true; }),
-            new ArgParsed('c', (ac, arg) => { ac.Cidr = true; }),
-            new ArgParsed('b', (ac, arg) => { ac.Broadcast = true; }),
-            new ArgParsed('f', (ac, arg) => { ac.FirstUsable = true; }),
-            new ArgParsed('l', (ac, arg) => { ac.LastUsable = true; }),
-            new ArgParsed('u', (ac, arg) => { ac.Usable = true; }),
-            new ArgParsed('t', (ac, arg) => { ac.Total = true; }),
-            new ArgParsed('w', (ac, arg) => { ac.Action = ProgramAction.Supernet; }),
-            new ArgParsed('W', (ac, arg) => { ac.Action = ProgramAction.WideSupernet; }),
-            new ArgParsed('h', (ac, arg) => { ac.Action = ProgramAction.Usage; }),
-            new ArgParsed('x', (ac, arg) => { ac.Action = ProgramAction.ListIPAddress; }),
-            new ArgParsed('?', (ac, arg) => { }),
-            new ArgParsed('D', (ac, arg) => { ac.CidrParse = CidrParseMode.Default; }),
+            new ArgParsed('i', (ac, arg) => ac.IPNetwork = true),
+            new ArgParsed('n', (ac, arg) => ac.Network = true),
+            new ArgParsed('m', (ac, arg) => ac.Netmask = true),
+            new ArgParsed('c', (ac, arg) => ac.Cidr = true),
+            new ArgParsed('b', (ac, arg) => ac.Broadcast = true),
+            new ArgParsed('f', (ac, arg) => ac.FirstUsable = true),
+            new ArgParsed('l', (ac, arg) => ac.LastUsable = true),
+            new ArgParsed('u', (ac, arg) => ac.Usable = true),
+            new ArgParsed('t', (ac, arg) => ac.Total = true),
+            new ArgParsed('w', (ac, arg) => ac.Action = ProgramAction.Supernet),
+            new ArgParsed('W', (ac, arg) => ac.Action = ProgramAction.WideSupernet),
+            new ArgParsed('h', (ac, arg) => ac.Action = ProgramAction.Usage),
+            new ArgParsed('x', (ac, arg) => ac.Action = ProgramAction.ListIPAddress),
+            new ArgParsed('?', (ac, arg) => _ = arg),
+            new ArgParsed('D', (ac, arg) => ac.CidrParse = CidrParseMode.Default),
             new ArgParsed('d', (ac, arg) =>
             {
                 ac.CidrParse = CidrParseMode.Value;
