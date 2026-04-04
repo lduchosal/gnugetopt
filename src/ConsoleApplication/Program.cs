@@ -171,8 +171,8 @@ namespace ConsoleApplication
         private static ProgramContext ParseArgs(string[] args)
         {
             int c;
-            Getopt g = new Getopt("ipnetwork", args, "inmcbfltud:Dhs:wWxC:o:S:");
-            ProgramContext ac = new ProgramContext();
+            var g = new Getopt("ipnetwork", args, "inmcbfltud:Dhs:wWxC:o:S:");
+            var ac = new ProgramContext();
 
             while ((c = g.getopt()) != -1)
             {
@@ -180,7 +180,7 @@ namespace ConsoleApplication
                 Program.Args[c].Run(ac, optArg);
             }
 
-            List<string> ipnetworks = new List<string>();
+            var ipnetworks = new List<string>();
             for (int i = g.Optind; i < args.Length; i++)
             {
                 if (!string.IsNullOrEmpty(args[i]))
@@ -227,7 +227,7 @@ namespace ConsoleApplication
 
         private static void ParseIPNetworks(ProgramContext ac)
         {
-            List<string> ipnetworks = new List<string>();
+            var ipnetworks = new List<string>();
             foreach (string ips in ac.NetworksString)
             {
                 if (!Program.TryParseIPNetwork(ac.CidrParse, out string? ipnetwork))
