@@ -17,19 +17,12 @@
     <authors>Luc Dvchosal</authors>
     <owners>Luc Dvchosal</owners>
     <copyright>Copyright 2021</copyright>
-    <SignAssembly>True</SignAssembly>
-    <SignAssembly Condition=" '$(OS)' != 'Windows_NT' ">false</SignAssembly>
-    <AssemblyOriginatorKeyFile>Gnu.Getopt.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Gnu.Getopt.snk</AssemblyOriginatorKeyFile>
     <RepositoryUrl>https://github.com/lduchosal/gnugetopt.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
 
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <SignAssembly>true</SignAssembly>
-    <SignAssembly Condition=" '$(OS)' != 'Windows_NT' ">false</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Gnu.Getopt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
